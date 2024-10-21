@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import carRoutes from "./routes/carRoutes"
+import bookRoutes from "./routes/book.routes"
 
 dotenv.config();
 
