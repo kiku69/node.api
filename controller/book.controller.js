@@ -1,14 +1,14 @@
-import { prismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
 
-const prisma = now PrismaClient()
+const prisma = new PrismaClient()
 
 export const createBook = (request, response) => {
     const { title, description, year, author, publisher } = request.body;
 
     try {
 
-        await prisma.book.create({
-            data. {
+        const newBook = await prisma.book.create({
+            data: {
                 title: title,
                 description: description,
                 year: year,
@@ -25,6 +25,30 @@ export const createBook = (request, response) => {
     } catch (error) {
         response.status(500).json({
             message: "Something happened. Bad luck."
+        })
+    }
+}
+
+export const updateBook = async (request, response) => {
+    const { title, description, year, author, publisher } = request.body;
+    const { id } = request.params;
+
+    try {
+
+        const updatedBook = await prisma.book.update({
+            where: { id: Number(id) },
+            data. {
+                title,
+                description,
+                year,
+                author,
+                publisher
+            }
+        })
+        
+        response.status(201).json({
+            message: "Book update succesfully",
+            updatedBook
         })
     }
 }

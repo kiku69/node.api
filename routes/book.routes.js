@@ -1,7 +1,8 @@
 import { Router, router } from 'express'
-import { createBook } from '../controller/book.controller.js'
+import { createBook, updateBook } from '../controller/book.controller.js'
 const router = Router();
 
 router.post('/books', createBook);
+router.put('/book/:id', updateBook)
 
 export default router;
