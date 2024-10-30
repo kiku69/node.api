@@ -1,8 +1,15 @@
-import { Router, router } from 'express'
-import { createBook, updateBook } from '../controller/book.controller.js'
+
+import { Router } from 'express';
+import { createBook, updateBook, getAllBooks, getBook } from '../controllers/book.controller.js'
+import { validate } from '../middlewares/validate.middleware.js';
+import { bookSchema } from '../validations/book.validate.js';
+
 const router = Router();
 
-router.post('/books', createBook);
-router.put('/book/:id', updateBook)
+router.get('/books', getAllBooks)
+router.get('/books/:id', getBook)
+router.post('/books', validate(bookSchema), createBook);
+router.put('/books/:id', validate(bookSchema), updateBook);
+router.delete('/books/:id', deleteBook)
 
 export default router;
